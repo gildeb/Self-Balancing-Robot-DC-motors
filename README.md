@@ -16,7 +16,7 @@ The robot is based on the Raspberry Pi Pico-W. It hosts a web server and is cont
 
 ## Schematic
 
-<img width="408" height="330" alt="SBR DC schematic" style="text-align: center;" src="https://github.com/user-attachments/assets/9a6793d9-0dad-4ebc-8e11-71ea9fed0f0f" />
+<img width="408" height="330" alt="SBR DC schematic" src="https://github.com/user-attachments/assets/9a6793d9-0dad-4ebc-8e11-71ea9fed0f0f" />
 
 ## PCB
 
