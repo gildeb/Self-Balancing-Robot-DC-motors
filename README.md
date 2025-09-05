@@ -64,6 +64,31 @@ html_file = '/SBR/PID_tuning.html'
 Your phone should display :
 
 <div align="center">
-<img width="210" height="400" alt="PID_tuning" src="https://github.com/user-attachments/assets/16bbf4a2-9843-46fd-8454-fec3b752607f" />
+   <img width="210" height="400" alt="PID_tuning" src="https://github.com/user-attachments/assets/16bbf4a2-9843-46fd-8454-fec3b752607f" />
 </div>
 
+Use _up_ button to lift up the robot (or manualy lift it near the vertical position)
+
+_down_ button will lay it down
+
+The two balance constants _kp_ and _kd_, and the two speed constants _kps_ and _kis_ can be changed "on the fly".
+
+## Joystick mode
+
+In _SBR.py_, choose the _PID_tuning.html_ file :
+
+```python
+html_file = '/SBR/joystick.html'
+```
+
+Your phone should display :
+
+<div align="center">
+    <img width="210" height="400" alt="joystick" src="https://github.com/user-attachments/assets/50b4896e-286c-41d6-a4d2-943c29243d4e" />
+</div>
+
+Use _up_ button to lift up the robot (or manualy lift it near the vertical position)
+
+_down_ button will lay it down
+
+Use joystick to move it around !
