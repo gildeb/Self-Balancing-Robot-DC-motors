@@ -13,6 +13,7 @@ The robot is based on the Raspberry Pi Pico-W. It hosts a web server and is cont
 - micro switch : https://fr.aliexpress.com/item/1005003938856402.html
 - wheels : https://fr.aliexpress.com/item/1005004190081964.html
 - 3D printed parts
+- 4 threaded rods and bolts
 
 ## Schematic
 <div align="center">
