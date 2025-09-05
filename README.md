@@ -43,7 +43,7 @@ print('WifiConnect successfull, ip =', WifiConnect('my_SSID').ifconfig()[0])
 
 On successfull connexion, the IP address of RP2040 will be displayed in the interpreter output.
 
-In your cell phone, open a browser (Chrome, Safari, ...) and just enter that address.
+In your cell phone, open a browser (Chrome, Safari, ...) and enter the address.
 
 ## Starting
 
