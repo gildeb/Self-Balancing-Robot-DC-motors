@@ -58,7 +58,7 @@ in _main.py_ file.
 In _SBR.py_, choose the _PID_tuning.html_ file :
 
 ```python
-html_file = '/SBR/PID_tuning.html'
+html_file = 'PID_tuning.html'
 ```
 
 Your phone should display :
@@ -79,7 +79,7 @@ The two balance constants _kp_ and _kd_, and the two speed constants _kps_ and _
 In _SBR.py_, choose the _PID_tuning.html_ file :
 
 ```python
-html_file = '/SBR/joystick.html'
+html_file = 'joystick.html'
 ```
 
 Your phone should display :
