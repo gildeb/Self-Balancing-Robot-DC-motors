@@ -5,6 +5,7 @@ The robot is based on the Raspberry Pi Pico-W. It hosts a web server and is cont
 <img width="403" height="302" alt="SBR_DC-3" src="https://github.com/user-attachments/assets/d37ec254-00dd-4796-9610-d8a4a4758957" />
 <img width="403" height="302" alt="SBR_DC-1" src="https://github.com/user-attachments/assets/41f5eff1-09cb-469e-8539-9f51251cff18" />
 <img width="403" height="302" alt="SBR_DC-2" src="https://github.com/user-attachments/assets/55f0489c-911d-44cc-9514-14550bc5b52c" />
+<img width="403" height="302" alt="SBR_DC-4" src="https://github.com/user-attachments/assets/10d5ff88-274c-469a-9617-52fd4ef51684" />
 
 
 ## Bill of materials
