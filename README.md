@@ -47,7 +47,9 @@ In your cell phone, open a browser (Chrome, Safari, ...) and enter the address.
 
 ## Starting
 
-To start automatically on boot, insert :
+You must first measure MPU6050 accelerometer and gyro offsets (see MPU6050dmp20 repository), and insert your values in _SBR.py_.
+
+To start robot automatically on boot, insert :
 
 ```python
 import SBR
@@ -55,6 +57,7 @@ import SBR
 in _main.py_ file.
 
 ## PID constant tuning
+
 
 In _SBR.py_, choose the _PID_tuning.html_ file :
 
