@@ -28,4 +28,8 @@ The robot is based on the Raspberry Pi Pico-W. It hosts a web server and is cont
 
 In _WifiConnect.py_, update _credentials_ dictionnary with your networks SSID and passwords (home, cell phone, ...).
 
-In _SBR.py_ , update line 170 with your favorite one :
+Update  _SBR.py_ with your favorite one :
+
+```python
+print('WifiConnect successfull, ip =', WifiConnect('my_SSID').ifconfig()[0])
+```
