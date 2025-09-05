@@ -28,8 +28,42 @@ The robot is based on the Raspberry Pi Pico-W. It hosts a web server and is cont
 
 In _WifiConnect.py_, update _credentials_ dictionnary with your networks SSID and passwords (home, cell phone, ...).
 
+```python
+    credentials = { 'my_SSID':'passwword',
+                  # other credentials
+                  }
+```
+
 Update  _SBR.py_ with your favorite one :
 
 ```python
 print('WifiConnect successfull, ip =', WifiConnect('my_SSID').ifconfig()[0])
 ```
+
+On successfull connexion, the IP address of RP2040 will be displayed in the interpreter output.
+
+In your cell phone, open a browser (Chrome, Safari, ...) and just enter that address.
+
+## Starting
+
+To start automatically on boot, insert :
+
+```python
+import SBR
+```
+in _main.py_ file.
+
+## PID constant tuning
+
+In _SBR.py_, choose the _PID_tuning.html_ file :
+
+```python
+html_file = '/SBR/PID_tuning.html'
+```
+
+Your phone should display :
+
+<div align="center">
+<img width="240" height="550" alt="PID_tuning" src="https://github.com/user-attachments/assets/f348a386-cd83-40c4-a893-e7e41679307d" />
+</div>
+
