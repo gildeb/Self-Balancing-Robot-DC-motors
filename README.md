@@ -23,3 +23,9 @@ The robot is based on the Raspberry Pi Pico-W. It hosts a web server and is cont
 <div align="center">
 <img width="425" height="255" alt="SBR DC pcb" src="https://github.com/user-attachments/assets/232d5cd7-0d6d-4eb9-b500-8c8707bdeb39" />
 </div>
+
+## WIFI connexion
+
+In _WifiConnect.py_, update _credentials_ dictionnary with your networks SSID and passwords (home, cell phone, ...).
+
+In _SBR.py_ , update line 170 with your favorite one :
