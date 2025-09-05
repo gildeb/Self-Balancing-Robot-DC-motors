@@ -1,0 +1,324 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>SBR gain tuning</title>
+    <style>
+    .container {
+      display: grid;
+      grid-template-rows: 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% 10% 10%;
+      grid-template-columns: 33% 33% 33%;
+      grid-gap: 5px;
+      margin-left: 10%;
+    }
+    .slider {
+      -webkit-appearance: none;
+      width: 80%;
+      height: 10%;
+      border-radius: 5px;  
+      background: #d3d3d3;
+      outline: none;
+      opacity: 0.7;
+      -webkit-transition: .2s;
+      transition: opacity .2s;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%; 
+      background: #04AA6D;
+      cursor: pointer;
+    }
+    .slidecontainer1 {
+      grid-column: 1/4;
+      grid-row: 2; 
+    }
+    .slidecontainer2 {
+      grid-column: 1/4;
+      grid-row: 4; 
+    }
+    .slidecontainer3 {
+      grid-column: 1/4;
+      grid-row: 6; 
+    }
+    .slidecontainer4 {
+      grid-column: 1/4;
+      grid-row: 8; 
+    }
+    .slidecontainer5 {
+      grid-column: 1/4;
+      grid-row: 10; 
+    }
+    .slidecontainer6 {
+      grid-column: 1/4;
+      grid-row: 12; 
+    }
+    .valsize1 {
+      font-size: 4em;
+      font-weight: bold;
+      text-align: center;
+      grid-column: 1/4;
+      grid-row: 1; 
+    }
+    .valsize2 {
+      font-size: 4em;
+      font-weight: bold;
+      text-align: center;
+      grid-column: 1/4;
+      grid-row: 3; 
+    }
+    .valsize3 {
+      font-size: 4em;
+      font-weight: bold;
+      text-align: center;
+      grid-column: 1/4;
+      grid-row: 5; 
+    }
+    .valsize4 {
+      font-size: 4em;
+      font-weight: bold;
+      text-align: center;
+      grid-column: 1/4;
+      grid-row: 7; 
+    }
+    .valsize5 {
+      font-size: 4em;
+      font-weight: bold;
+      text-align: center;
+      grid-column: 1/4;
+      grid-row: 9; 
+    }
+    .valsize6 {
+      font-size: 4em;
+      font-weight: bold;
+      text-align: center;
+      grid-column: 1/4;
+      grid-row: 11; 
+    }
+    .valsize7 {
+      font-size: 3em;
+      font-weight: bold;
+      text-align: left;
+      grid-column: 1;
+      grid-row: 14; 
+    }
+    .valsize8 {
+      font-size: 3em;
+      font-weight: bold;
+      text-align: right;
+      grid-column: 2;
+      grid-row: 14; 
+    }
+    .buttonup {
+      grid-column: 1;
+      grid-row: 13;
+      margin-left : center;
+    }
+    .buttonstop {
+      grid-column: 2;
+      grid-row: 13;
+      margin-left : center;
+    }
+    .styled {
+        display: inline-flex;
+        justify-content: center; /*center text horizontaly */
+        align-items: center; /* center text horizontaly */
+        width: 250px;
+        height: 100px;
+        border: 0;
+        font-size: 3rem;
+        color: #fff;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 50px;
+        background-color: rgba(220, 0, 0, 1);
+        background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+        box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+        }
+    </style>
+</head>
+<body scroll="no" style="overflow: hidden">
+	
+    <div class="container">
+        
+	<span class="valsize1"> kp: <span id="kpval">30</span> </span>
+    <div class="slidecontainer1">
+		<input type="range" min="0" max="50" value="30" step="1" class="slider" id="kpslider">
+	</div>
+    
+	<span class="valsize2"> kd: <span id="kdval">2.6</span> </span>
+    <div class="slidecontainer2">
+		<input type="range" min="0.0" max="5" value="2.6" step="0.01" class="slider" id="kdslider">
+	</div>
+    
+    <span class="valsize3"> kps: <span id="kpsval">5</span> </span>
+	<div class="slidecontainer3">
+		<input type="range" min="0.0" max="20" value="5" step="0.1" class="slider" id="kpsslider">
+	</div>
+ 
+	<span class="valsize4"> kis: <span id="kisval">0.15</span> </span>
+	<div class="slidecontainer4">
+		<input type="range" min="0" max="1" value="0.15" step="0.01" class="slider" id="kisslider" >
+    </div>
+	
+    <span class="valsize5"> speed: <span id="speedval">0</span> </span>
+	<div class="slidecontainer5">
+		<input type="range" min="-100" max="100" value="0" step="1" class="slider" id="speedslider">
+	</div>
+
+    <span class="valsize6"> turn: <span id="turnval">0</span> </span>
+	<div class="slidecontainer6">
+		<input type="range" min="-150" max="150" value="0" step="5" class="slider" id="turnslider" >
+	</div>
+	
+    <div class="buttonup">
+        <button id="riseup" type="button" class="styled">
+                up!
+        </button>
+    </div>
+    <div class="buttonstop">
+        <button id="stop" type="button" class="styled">
+                stop
+        </button>
+    </div>
+    <div class="buttondown">
+        <button id="down" type="button" class="styled">
+                down!
+        </button>
+    </div>
+    
+    <span class="valsize7" id="datal"> ------- </span>
+    <span class="valsize8" id="datar"> ------- </span>
+
+    </div>
+    
+	<script>
+        var ws = new WebSocket("ws://" + location.hostname + ":80");
+        
+        var kpslider = document.getElementById("kpslider");
+		var kpval = document.getElementById("kpval");
+        var kdslider  = document.getElementById("kdslider");
+		var kdval = document.getElementById("kdval");
+        var kpsslider = document.getElementById("kpsslider");
+		var kpsval = document.getElementById("kpsval");
+		var kisslider = document.getElementById("kisslider");
+		var kisval = document.getElementById("kisval");
+        var speedslider = document.getElementById("speedslider");
+		var speedval = document.getElementById("speedval");
+		var turnslider = document.getElementById("turnslider");
+		var turnval = document.getElementById("turnval");
+        var riseup  = document.getElementById("riseup");
+        var stop = document.getElementById("stop");
+        var down = document.getElementById("down");
+        
+        ws.onopen = function() {
+            ws.send("\n");
+            ws.send("kp=" + kpslider.value + "\n");
+            ws.send("kd=" + kdslider.value + "\n");
+            ws.send("kps=" + kpsslider.value + "\n");
+            ws.send("kis=" + kisslider.value + "\n");
+            ws.send("speed=" + speedslider.value + "\n");
+            ws.send("turn=" + turnslider.value + "\n");
+            ws.send("\n");
+        }
+
+        ws.onmessage = function (evt) {
+            [datal, datar] = evt.data.split(',');
+            document.getElementById("datal").innerHTML = datal;
+            document.getElementById("datar").innerHTML = datar;
+        }
+        kpslider.oninput = function () {
+            kpval.innerHTML = this.value;
+        }
+        kdslider.oninput = function () {
+            kdval.innerHTML = this.value;
+        }
+        kpsslider.oninput = function () {
+            kpsval.innerHTML = this.value;
+        }
+        kisslider.oninput = function () {
+            kisval.innerHTML = this.value;
+        }
+        speedslider.oninput = function () {
+            speedval.innerHTML = this.value;
+        }
+        turnslider.oninput = function () {
+            turnval.innerHTML = this.value;
+        }
+
+        kpslider.addEventListener ('touchend', kpinput);
+        kdslider.addEventListener ('touchend', kdinput);
+        kpsslider.addEventListener ('touchend', kpsinput);
+        kisslider.addEventListener ('touchend', kisinput);
+        speedslider.addEventListener ('touchend', speedinput);
+        turnslider.addEventListener ('touchend', turninput);
+        turnval.addEventListener ('touchend', turninput);
+        riseup.addEventListener ('touchend', riseupinput);
+        stop.addEventListener ('touchend', resetspeed);
+        down.addEventListener ('touchend', downinput);
+        
+        function kpinput(evt){
+            evt.preventDefault();
+            kpval.innerHTML = kpslider.value;
+            ws.send("kp=" + kpslider.value + "\n");
+        }
+        function kdinput(evt){
+            evt.preventDefault();
+            kdval.innerHTML = kdslider.value;
+            ws.send("kd=" + kdslider.value + "\n");
+        }
+        function kpsinput(evt){
+            evt.preventDefault();
+            kpsval.innerHTML = kpsslider.value;
+            ws.send("kps=" + kpsslider.value + "\n");
+        }
+        function kisinput(evt){
+            evt.preventDefault();
+            kisval.innerHTML = kisslider.value;
+            ws.send("kis=" + kisslider.value + "\n");
+        }
+        function speedinput(evt){
+            evt.preventDefault();
+            if (Math.abs(speedslider.value) < 5) {
+                speedslider.value = 0;
+             }
+            speedval.innerHTML = speedslider.value;
+            ws.send("speed=" + speedslider.value + "\n");
+        }
+        function turninput(evt){
+            evt.preventDefault();
+            if (Math.abs(turnslider.value) < 5) {
+                turnslider.value = 0;
+                }
+            turnval.innerHTML = turnslider.value;
+            ws.send("turn=" + turnslider.value + "\n");
+        }
+        function riseupinput(evt){
+            evt.preventDefault();
+            ws.send("start()\n");
+        }
+        function resetspeed(evt){
+            evt.preventDefault();
+            speedslider.value = 0;
+            turnslider.value = 0;
+            speedval.innerHTML = 0;
+            turnval.innerHTML = 0;
+            ws.send("speed=0\n");
+            ws.send("turn=0\n");
+        }
+        function downinput(evt){
+            evt.preventDefault();
+            ws.send("down()\n");
+        }
+ 
+	</script>
+
+</body>
+</html>

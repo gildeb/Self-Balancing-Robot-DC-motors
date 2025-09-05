@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8" content="user-scalable=no">
+    <title>SBR</title>
+    
+    <style>
+    
+    body{ 
+        position: fixed;
+        touch-action: none;
+    }
+
+    .container {
+        display: grid;
+        grid-template-rows: 20% 20% 60% 20%;
+        grid-template-columns: 50% 50%;
+        grid-gap: 5px;
+        margin-left: 10%;
+    }
+    .title {
+        margin-left: 20%;
+        text-align: center;
+        font-size: 8em;
+        grid-column: 1/3;
+        grid-row: 1;
+    }
+    .coordx {
+        text-align: center;
+        font-size: 4.5em;
+        grid-column: 1;
+        grid-row: 2;
+        align-content: center;
+    }
+    .coordy {
+        text-align: center;
+        font-size: 4.5em;
+        grid-column: 2;
+        grid-row: 2;
+        align-content: center;
+    }
+    .subcontainer {
+        grid-column: 1/4;
+        grid-row: 3;
+    }
+    .stick {
+        grid-column: 1/3;
+        grid-row: 3;
+        align-content: center;
+    }
+    .buttonup {
+      grid-column: 1;
+      grid-row: 4;
+      align-content: center;
+      margin-left: 20%;
+    }  
+    .buttondown {
+      grid-column: 2;
+      grid-row: 4;
+      align-content: center;
+      margin-left: 20%;
+    }
+    .styled {
+        display: inline-flex;
+        justify-content: center; /*center text horizontaly */
+        align-items: center; /* center text horizontaly */
+        width: 250px;
+        height: 100px;
+        border: 0;
+        font-size: 3rem;
+        color: #fff;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 50px;
+        background-color: rgba(220, 0, 0, 1);
+        background-image: linear-gradient(to top left,
+                                      rgba(0, 0, 0, .2),
+                                      rgba(0, 0, 0, .2) 30%,
+                                      rgba(0, 0, 0, 0));
+        box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        
+        <h3 class="title" > SBR </h3>
+        
+        <div class="coordx" >
+            speed: <span id="x_coordinate"> 0 </span>
+        </div>
+        
+        <div class="coordy" >
+            turn: <span id="y_coordinate"> 0 </span>
+        </div>
+        
+        <div class="subcontainer">
+           <canvas id="joy" class="stick"> </canvas>
+        </div>
+        
+        <div class="buttonup">
+        <button id="riseup" type="button" class="styled">
+                up!
+        </button>
+        </div>
+        
+        <div class="buttondown">
+        <button id="down" type="button" class="styled">
+                down!
+        </button>
+        </div>
+    </div>
+
+    <script>
+       const bkgd_color = '#ECE5E5';
+       const jstk_color = '#0000FB';
+       const black      = '#000000';
+       const MAX_SPEED  = 80;
+       const MAX_TURN   = 50;
+        
+       var ws = new WebSocket("ws://" + location.hostname + ":80");
+       var canvas, ctx;
+       var width, height, radius_bkgd, radius_jstk, x_orig, y_orig, speed, turn;
+       
+       var riseup  = document.getElementById("riseup");
+       var down    = document.getElementById("down");
+        
+       let coord = { x: 0, y: 0 };
+       let move  = false;
+       let mess = "";
+        
+        window.addEventListener('load', () => {
+            canvas = document.getElementById('joy');
+            ctx = canvas.getContext('2d');          
+            resize(); 
+
+            document.addEventListener('touchstart', startMove);
+            document.addEventListener('touchend', resetCoords);
+            document.addEventListener('touchcancel', resetCoords);
+            document.addEventListener('touchmove', Draw);
+            window.addEventListener('resize', resize);
+
+            document.getElementById("x_coordinate").innerText = 0;
+            document.getElementById("y_coordinate").innerText = 0;
+        });
+        
+        riseup.addEventListener ('touchend', riseupinput);
+        down.addEventListener ('touchend', downinput);
+        
+        setInterval(send_ws, 200);
+        
+        function send_ws(){
+            if (!move) return;
+            var m = "speed=" + speed + ";" + "turn=" + turn + "\n";
+            if (m != mess) {
+                ws.send(m);
+                mess = m;
+             }
+        }
+        
+        function riseupinput(evt){
+            evt.preventDefault();
+            ws.send("start()\n");
+         //   alert("up");
+        }
+        
+        function downinput(evt){
+            evt.preventDefault();
+            ws.send("down()\n");
+         //   alert("down");
+        }
+        
+        function resize() {
+            width  = window.innerWidth*0.8;
+            height = window.innerHeight*.4;
+            ctx.canvas.width  = width;
+            ctx.canvas.height = height;
+            x_orig = width/2;
+            y_orig = height/2;
+            coord.x = x_orig;
+            coord.y = y_orig;
+            speed = 0;
+            turn  = 0;
+            radius_bkgd = height*.33;
+            radius_jstk = radius_bkgd/2;
+            draw_bkgd();
+            draw_jstk();
+        }
+
+        function draw_bkgd() {
+            ctx.beginPath();
+            ctx.arc(x_orig, y_orig, radius_bkgd + 20, 0, Math.PI * 2, true);
+            ctx.fillStyle = bkgd_color;
+            ctx.fill();
+            ctx.beginPath();
+            ctx.rect(x_orig - height/2, y_orig - height/2, height, height)
+            ctx.strokeStyle = black;
+            ctx.lineWidth = 4;
+            ctx.stroke();
+        }
+
+        function draw_jstk() {
+            ctx.beginPath();
+            ctx.arc(coord.x, coord.y, radius_jstk, 0, Math.PI * 2, true);
+            ctx.fillStyle = jstk_color;
+            ctx.fill();
+            ctx.strokeStyle = black;
+            ctx.lineWidth = 4;
+            ctx.stroke();
+        }
+
+        function getPosition(event) {
+            var mouse_x = event.clientX || event.touches[0].clientX;
+            var mouse_y = event.clientY || event.touches[0].clientY;
+            coord.x = mouse_x - canvas.offsetLeft;
+            coord.y = mouse_y - canvas.offsetTop;
+            if (Math.abs(coord.x - x_orig) > height/2 - radius_jstk){
+                coord.x = x_orig + Math.sign(coord.x - x_orig)*(height/2 - radius_jstk);
+            }
+            if (Math.abs(coord.y - y_orig) > height/2 - radius_jstk){
+                coord.y = y_orig + Math.sign(coord.y - y_orig)*(height/2 - radius_jstk);
+            }
+            turn = Math.round(2*MAX_TURN*(coord.x - x_orig)/(height/2 + radius_jstk));   
+            speed = -Math.round(2*MAX_SPEED*(coord.y - y_orig)/(height/2 + radius_jstk));
+        }
+
+        function startMove(event) {
+            getPosition(event);
+            var radius = Math.sqrt(Math.pow(coord.x - x_orig, 2) + Math.pow(coord.y - y_orig, 2));
+            if (radius < radius_jstk) move = true;
+        }
+
+        function resetCoords(event) {
+            move = false;
+            coord.x = x_orig;
+            coord.y = y_orig;
+            speed = 0;
+            turn  = 0;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            draw_bkgd();
+            draw_jstk();
+            document.getElementById("x_coordinate").innerText = 0;
+            document.getElementById("y_coordinate").innerText = 0;
+            ws.send("speed=0;turn=0\n");
+        }
+
+        function Draw(event) {
+            if (!move) return;
+            getPosition(event);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            draw_bkgd();
+            draw_jstk();
+            
+            document.getElementById("x_coordinate").innerText = speed;
+            document.getElementById("y_coordinate").innerText = turn;
+        } 
+    </script>
+</body>
+</html>
