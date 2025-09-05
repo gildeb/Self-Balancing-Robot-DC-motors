@@ -76,7 +76,16 @@ Use _up_ button to lift up the robot (or manualy lift it near the vertical posit
 
 _down_ button will lay it down
 
-The two balance constants _kp_ and _kd_, and the two speed constants _kps_ and _kis_ can be changed "on the fly".
+The two balance constants _kp_ and _kd_, and the two speed constants _kps_ and _kis_ can be changed "on the fly"
+
+To change one slider range, you must edit _PID_tuning.html_. For example, to change min and max of _kp_ :
+
+```html
+<span class="valsize1"> kp: <span id="kpval">30</span> </span>
+    <div class="slidecontainer1">
+		<input type="range" min="0" max="50" value="30" step="1" class="slider" id="kpslider">
+	</div>
+```
 
 ## Joystick mode
 
