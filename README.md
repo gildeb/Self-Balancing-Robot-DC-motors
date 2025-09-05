@@ -64,6 +64,6 @@ html_file = '/SBR/PID_tuning.html'
 Your phone should display :
 
 <div align="center">
-<img width="240" height="550" alt="PID_tuning" src="https://github.com/user-attachments/assets/f348a386-cd83-40c4-a893-e7e41679307d" />
+<img width="828" height="1644" alt="PID_tuning" src="https://github.com/user-attachments/assets/16bbf4a2-9843-46fd-8454-fec3b752607f" />
 </div>
 
