@@ -67,6 +67,7 @@ Your phone should display :
    <img width="210" height="400" alt="PID_tuning" src="https://github.com/user-attachments/assets/16bbf4a2-9843-46fd-8454-fec3b752607f" />
 </div>
 
+
 Use _up_ button to lift up the robot (or manualy lift it near the vertical position)
 
 _down_ button will lay it down
@@ -86,6 +87,7 @@ Your phone should display :
 <div align="center">
     <img width="210" height="400" alt="joystick" src="https://github.com/user-attachments/assets/50b4896e-286c-41d6-a4d2-943c29243d4e" />
 </div>
+
 
 Use _up_ button to lift up the robot (or manualy lift it near the vertical position)
 
